@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 const db = require('./config')
 
-const Category = db.define('Categorie', {
+const Commentaire = db.define('Categorie', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -13,4 +13,4 @@ const Category = db.define('Categorie', {
     }
 }
 )
-module.exports = { Category }
+module.exports = { Commentaire }
