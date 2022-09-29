@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const { getCommentaires } = require('../controllers/commentaireController')
+const { createComment, getCommentByPost } = require('../controllers/commentaireController')
 
-router.get('/', getCommentaires)
+router.get('/:idPost', getCommentByPost)
+router.post('/add/:idPost', createComment)
 
 module.exports = router
