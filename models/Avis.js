@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize')
 const db = require('./config')
+const { Articles } = require('./Articles')
 
 const Avis = db.define('Avis', {
     avis_id: {
@@ -16,5 +17,6 @@ const Avis = db.define('Avis', {
         allowNull: false
     },
 })
-// Article.hasMany(Avis)
+Articles.hasMany(Avis);
+Avis.belongsTo(Articles);
 module.exports = { Avis }

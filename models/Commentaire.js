@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize')
 const db = require('./config')
-// const { Category } = require('./Category')
+const { Articles } = require('./Articles')
 
 let Commentaire = db.define('Commentaire', {
     id: {
@@ -18,6 +18,6 @@ let Commentaire = db.define('Commentaire', {
     }
 }
 )
-// Category.hasMany(Commentaire);
-// Commentaire.belongsTo(Category);
+Articles.hasMany(Commentaire);
+Commentaire.belongsTo(Articles);
 module.exports = { Commentaire }
