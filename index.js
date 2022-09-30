@@ -5,9 +5,7 @@ require('dotenv').config()
 
 //Routers
 const commentaireRouter = require('./routes/commentaire')
-const avisRouter = require('./routes/avis')
-const articleRouter = require('./routes/article')
-
+const categorieRouter = require('./routes/categorie');
 
 db.authenticate()
     .then(() => {
@@ -20,9 +18,7 @@ db.authenticate()
 app.use(express.json())
 
 app.use('/commentaire', commentaireRouter)
-app.use('/avis', avisRouter)
-app.use('/article', articleRouter)
-
+app.use('/categorie', categorieRouter)
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {
