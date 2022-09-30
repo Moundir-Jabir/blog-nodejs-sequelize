@@ -19,5 +19,4 @@ const Commentaire = db.define('commentaire', {
 }
 )
 Articles.hasMany(Commentaire);
-Commentaire.belongsTo(Articles);
 module.exports = { Commentaire }

@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize')
 const db = require('./config')
+const { Categorie } = require('./Categorie')
 
 const Articles = db.define('article', {
     id: {
@@ -22,6 +23,5 @@ const Articles = db.define('article', {
 
 }
 )
-// Category.hasMany(Articles);
-// Articles.belongsTo(Category);
+Categorie.hasMany(Articles);
 module.exports = { Articles }
