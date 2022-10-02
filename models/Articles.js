@@ -24,4 +24,5 @@ const Articles = db.define('article', {
 }
 )
 Categorie.hasMany(Articles);
+Articles.belongsTo(Categorie)
 module.exports = { Articles }
