@@ -1,9 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const { getarticles, create } = require('../controllers/articleController')
+const { getarticles, create, getArticlebyid } = require('../controllers/articleController')
 
 router.get('/', getarticles)
 router.post('/', create)
+//router.get('/:id', getArticlebyid)
+
 
 
 module.exports = router
