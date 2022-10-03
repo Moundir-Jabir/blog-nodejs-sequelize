@@ -10,7 +10,7 @@ exports.getarticles = () => {
 }
 
 exports.create = (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   Articles.create(req.body)
     .then(data => {
       res.send(data);
@@ -21,3 +21,22 @@ exports.create = (req, res) => {
       });
     });
 }
+
+// exports.getArticlebyid = async(req, res) =>{
+//   const id = req.params.id;
+//   let categories = await getCategorie()
+//   let articles = await getarticles()
+//   res.render('index', {
+//       articles,categories
+//   })
+// }
+
+exports.getArticlebyid = (id) => {
+  return Articles.findByPk(id,
+    {
+      raw: true,
+      nest: true,
+      include: Categorie
+    })
+  
+};

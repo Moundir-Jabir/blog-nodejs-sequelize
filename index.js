@@ -3,12 +3,14 @@ const express = require('express')
 const app = express()
 require('dotenv').config()
 const { engine } = require('express-handlebars')
-const { getarticles } = require('./controllers/articleController')
+const { getarticles, getArticlebyid } = require('./controllers/articleController')
 const { getCategorie } = require('./controllers/categorieController')
 
 //Routers
 const commentaireRouter = require('./routes/commentaire')
 const categorieRouter = require('./routes/categorie');
+const articleRouter = require('./routes/article');
+
 
 db.authenticate()
     .then(() => {
@@ -22,6 +24,7 @@ app.use(express.json())
 
 app.set('view engine', 'handlebars')
 app.set('views', './views')
+
 app.engine('handlebars', engine({ defaultLayout: 'main' }))
 
 app.get('/', async(req, res) => {
@@ -31,9 +34,17 @@ app.get('/', async(req, res) => {
         articles,categories
     })
 })
+app.get('/:id', async(req, res) => {
+    let categories = await getCategorie()
+    let article = await getArticlebyid(req.params.id)
+    res.render('article', {
+        article,categories
+    })
+})
 
 app.use('/commentaire', commentaireRouter)
 app.use('/categorie', categorieRouter)
+app.use('/article', articleRouter)
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {

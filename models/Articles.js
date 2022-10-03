@@ -20,6 +20,7 @@ const Articles = db.define('article', {
         type: DataTypes.STRING,
         allowNull: false
     },
+  
 
 }
 )
