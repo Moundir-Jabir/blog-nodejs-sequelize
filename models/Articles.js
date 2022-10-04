@@ -19,9 +19,7 @@ const Articles = db.define('article', {
     content: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-  
-
+    }
 }
 )
 Categorie.hasMany(Articles);

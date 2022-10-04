@@ -1,5 +1,11 @@
 const { Commentaire } = require('../models/Commentaire')
 
+exports.adminUpdateComment = (req,res) => {
+    res.render('./admin/update-comment' ,{
+        layout: 'admin'
+    })
+}
+
 exports.createComment = (req, res, id) => {
     Commentaire.create(req.body).then(e => res.json({ message: 'post created' }))
     .catch(err => res.status(400).json({err}))
