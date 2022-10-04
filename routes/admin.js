@@ -6,7 +6,7 @@ const { adminPosts, adminCreatePosts, adminGetPostById, adminUpdatePost } = requ
 const { adminUpdateRate } = require('../controllers/avisController')
 const { adminUpdateComment } = require('../controllers/commentaireController')
 
-router.get('/', adminDashboard)
+router.get('/index', adminDashboard)
 router.get('/posts', adminPosts)
 router.get('/posts/add', adminCreatePosts)
 router.get('/posts/details', adminGetPostById)

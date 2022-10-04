@@ -51,7 +51,6 @@ app.use('/admin', categorieAdmin)
 app.use('/commentaire', commentaireRouter)
 app.use('/categorie', categorieRouter)
 app.use('/article', articleRouter)
-app.use('/update',categorieAdmin )
 
 
 
