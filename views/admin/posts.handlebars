@@ -4,12 +4,13 @@
         <a href="posts/add" class="btn btn-primary rounded add">Add new Post</a>
           
         <div class="row">
-
+ {{#each posts}}
             <div class="col my-3 rounded">
+                
                 <div class="card" style="width: 18rem;">
                     <img src="/img/img11.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title text-center">Post Title</h5>
+                      <h5 class="card-title text-center"> {{title}}</h5>
                       <div class="text-center">
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
@@ -17,14 +18,16 @@
                         <span class="fa fa-star"></span>
                         <span class="fa fa-star"></span>
                       </div>
+                    
                       <p class="card-text"><span class="text-dark">Created by :</span> Admin</p>
-                      <p class="card-text"><span class="text-dark">Created at :</span> 2022-10-30 - 12:00 pm</p>
-                      <p class="card-text"><span class="text-dark">Category :</span> Information Technology</p>
+                      <p class="card-text"><span class="text-dark">Created at :</span> {{createdAt}}</p>
+                      <p class="card-text"><span class="text-dark">Category :</span> {{categorie.name}}</p>
                       <a href="posts/details" class="text-primary unde">Read More</a>
                     </div>
                 </div>
+                
             </div>
-
+  {{/each}}
             
         </div>
         </div><!-- sl-pagebody -->

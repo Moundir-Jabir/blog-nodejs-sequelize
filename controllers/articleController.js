@@ -1,17 +1,31 @@
 const { Articles } = require('../models/Articles')
 const { Categorie } = require('../models/Categorie')
 
-exports.adminPosts = (req,res) => {
+const getarticles = exports.getarticles = () => {
+  return Articles.findAll({
+    raw: true,
+    nest: true,
+    include: Categorie
+  })
+}
+
+
+exports.adminPosts = async(req,res) => {
+  let posts = await getarticles()
   res.render('./admin/posts' ,{
+    posts,
       layout: 'admin'
   })
 }
+
 exports.adminCreatePosts = (req,res) => {
   res.render('./admin/add-post' ,{
       layout: 'admin'
   })
 }
+
 exports.adminGetPostById = (req,res) => {
+
   res.render('./admin/post-detail' ,{
       layout: 'admin'
   })
@@ -21,13 +35,7 @@ exports.adminUpdatePost = (req,res) => {
       layout: 'admin'
   })
 }
-exports.getarticles = () => {
-  return Articles.findAll({
-    raw: true,
-    nest: true,
-    include: Categorie
-  })
-}
+
 
 exports.create = (req, res) => {
   // console.log(req.body)
@@ -51,7 +59,7 @@ exports.create = (req, res) => {
 //   })
 // }
 
-exports.getArticlebyid = (id) => {
+const getArticlebyid = exports.getArticlebyid = (id) => {
   return Articles.findByPk(id,
     {
       raw: true,
