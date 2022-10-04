@@ -1,3 +1,4 @@
+const { log } = require('handlebars')
 const { Categorie } = require('../models/categorie')
 
 
@@ -27,8 +28,19 @@ exports.adminAddCategorie = (req,res) => {
 }
 
 
+// rendre View Admin for Update Categories:
 
-  
+exports.adminUpdateCategorie = async (req,res) => {
+  let id = req.params.id;
+  let cat = await Categorie.findOne({id:id})
+  let i = cat.name
+  res.render('./admin/update-category' ,  { i , id,
+        layout: 'admin'
+  })
+  console.log(i)
+}  
+
+
     // Create a categorie
     exports.create = (req, res) => {
         
@@ -36,7 +48,7 @@ exports.adminAddCategorie = (req,res) => {
           name: req.body.name,
         };
       
-        // Save Cate in the database
+        // Save Categorie in the database
         Categorie.create(category)
           .then(data => {
             res.redirect('/admin/categories');
@@ -44,9 +56,33 @@ exports.adminAddCategorie = (req,res) => {
           .catch(err => {
             res.status(500).send({
               message:
-                err.message || "Some error occurred while creating the Tutorial."
+                err.message || "Some error occurred while creating this Categorie."
             })
           })
+      };
+
+
+      // U
+      exports.update = (req, res) => {
+        const id = req.params.id;
+      
+        Categorie.update(req.body, {
+          where: { id: id }
+        })
+          .then(num => {
+            if (num == 1) {
+              res.redirect('/admin/categories')
+            } else {
+              res.send({
+                message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`
+              });
+            }
+          })
+          .catch(err => {
+            res.status(500).send({
+              message: "Error updating Tutorial with id=" + id
+            });
+          });
       };
 
       // delete a categorie : 
@@ -72,4 +108,8 @@ exports.adminAddCategorie = (req,res) => {
           });
       };
 
+
+      // update a categorie : 
+      
+  
 

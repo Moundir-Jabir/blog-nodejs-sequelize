@@ -84,15 +84,11 @@
 
             <div class="w-75 mx-auto bg-white rounded px-5 py-3 main-form">
                 <h5 class="text-center py-2" id="h5-add">Update The Category</h5>
-                <form action="action.php" method="post" id="add-form">
+                <form action="/categorie/update/{{id}}" method="post" id="add-form">
                     <div class="d-block" id="general-infos">
                       <div class="d-block">
-                        <label for="category-name">Name</label>
-                        <input type="text" name="category-name" id="category-name" class="form-control">
-                      </div>
-                      <div class="d-block mt-3">
-                          <label for="created-by">Created by</label>
-                          <input type="text" name="tour-created-by" id="created-by" class="form-control">
+                        <label for="category-name" ></label>
+                        <input type="text" name="name" value="{{i}}"  id="category-name" class="form-control">
                       </div>
                       <button type="submit" class="btn btn-primary my-3 rounded crs">Submit</button>
                     </div>

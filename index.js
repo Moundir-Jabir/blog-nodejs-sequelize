@@ -40,7 +40,6 @@ app.get('/', async(req, res) => {
 app.use('/admin', categorieAdmin)
 app.use('/commentaire', commentaireRouter)
 app.use('/categorie', categorieRouter)
-app.use('/update',categorieAdmin )
 
 
 
