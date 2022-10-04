@@ -1,103 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Post Details</title>
 
-    <!-- vendor css -->
-    <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="lib/Ionicons/css/ionicons.css" rel="stylesheet">
-    <link href="lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
-    <link href="lib/rickshaw/rickshaw.min.css" rel="stylesheet">
-
-    <!-- Starlight CSS -->
-    <link rel="stylesheet" href="css/starlight.css">
-
-        <!-- Tailwind -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-        <style>
-            @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
-    
-            .font-family-karla {
-                font-family: karla;
-            }
-        </style>
-    
-        <!-- AlpineJS -->
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-        <!-- Font Awesome -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
-  </head>
-
-  <body>
-
-    <!-- ########## START: LEFT PANEL ########## -->
-    <div class="sl-logo"><a href="#">Blog App</a></div>
-    <div class="sl-sideleft">
-
-      <label class="sidebar-label">Navigation</label>
-      <div class="sl-sideleft-menu">
-        <a href="dashboard.html" class="sl-menu-link">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-            <span class="menu-item-label">Dashboard</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-
-        <a href="posts.html" class="sl-menu-link active">
-            <div class="sl-menu-item">
-              <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
-              <span class="menu-item-label">Posts</span>
-            </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-
-        <a href="categories.html" class="sl-menu-link">
-            <div class="sl-menu-item">
-              <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
-              <span class="menu-item-label">Categories</span>
-            </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-      </div><!-- sl-sideleft-menu -->
-
-      <br>
-    </div><!-- sl-sideleft -->
-    <!-- ########## END: LEFT PANEL ########## -->
-    <!-- ########## END: LEFT PANEL ########## -->
-
-    <!-- ########## START: HEAD PANEL ########## -->
-    <div class="sl-header">
-      <div class="sl-header-left">
-        <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
-        <div class="navicon-left hidden-lg-up"><a id="btnLeftMenuMobile" href=""><i class="icon ion-navicon-round"></i></a></div>
-      </div><!-- sl-header-left -->
-      <div class="sl-header-right">
-        <nav class="nav">
-          <div class="dropdown">
-            <a href="" class="nav-link nav-link-profile">
-              <span class="logged-name">Hi!<span class="hidden-md-down"> Admin</span></span>
-            </a>
-            </div><!-- dropdown -->
-        </nav>
-      </div><!-- sl-header-right -->
-    </div><!-- sl-header -->
-    <!-- ########## END: HEAD PANEL ########## -->
-
-      </div><!-- tab-content -->
-    </div><!-- sl-sideright -->
-    <!-- ########## END: RIGHT PANEL ########## --->
-
-    <div class="sl-mainpanel">
-
-        <nav class="breadcrumb sl-breadcrumb pst-det w-100">
-            <span class="breadcrumb-item active">Post Details</span>
-            <span> <a href="update-post.html" class="btn btn-primary rounded">Update Post</a> </span>
-            <span> <a href="#" class="btn btn-danger rounded">Remove Post</a> </span>
-        </nav>
   
         <div class="sl-pagebody">
+
+            <div class="d-flex justify-content-center my-3">
+              <a href="details/update-post" class="btn btn-primary rounded mx-2">Update Post</a> 
+              <a href="#" class="btn btn-danger rounded">Remove Post</a> 
+            </div>
 
             <div class="w-75 mx-auto bg-white rounded px-5 py-3 main-form">
                 <article class="flex flex-col shadow my-4">
@@ -115,7 +24,7 @@
                                 <span class="fa fa-star"></span>
                                 <span class="fa fa-star"></span>
                                 <div class="actions mt-1 d-none" id="action-rate">
-                                    <a href="update-rate.html" class="text-primary">Edit</a>
+                                    <a href="details/update-rate" class="text-primary">Edit</a>
                                     <a href="#" class="text-danger mx-2">Remove</a>
                                 </div>
                             </div>
@@ -140,7 +49,7 @@
                         <p class="font-semibold text-xl">David</p>
                         <p class="pt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel neque non libero suscipit suscipit eu eu urna.</p>
                         <div class="actions">
-                            <a href="update-comment.html" class="text-primary">Edit</a>
+                            <a href="details/update-comment" class="text-primary">Edit</a>
                             <a href="#" class="text-danger mx-2">Remove</a>
                         </div>
                     </div>
@@ -148,7 +57,7 @@
                         <p class="font-semibold text-xl">David</p>
                         <p class="pt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel neque non libero suscipit suscipit eu eu urna.</p>
                         <div class="actions">
-                            <a href="update-comment.html" class="text-primary">Edit</a>
+                            <a href="details/update-comment" class="text-primary">Edit</a>
                             <a href="#" class="text-danger mx-2">Remove</a>
                         </div>
                     </div>
@@ -156,7 +65,7 @@
                         <p class="font-semibold text-xl">David</p>
                         <p class="pt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel neque non libero suscipit suscipit eu eu urna.</p>
                         <div class="actions">
-                            <a href="update-comment.html" class="text-primary">Edit</a>
+                            <a href="details/update-comment" class="text-primary">Edit</a>
                             <a href="#" class="text-danger mx-2">Remove</a>
                         </div>
                     </div>
