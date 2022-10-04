@@ -5,7 +5,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const { engine } = require('express-handlebars')
 const { getarticles } = require('./controllers/articleController')
-const { getCategorie } = require('./controllers/categorieController')
+const { getCategorie  } = require('./controllers/categorieController')
 const path = require('path')
 
 //Routers
@@ -38,11 +38,11 @@ app.get('/', async(req, res) => {
 })
 
 app.use('/admin', categorieAdmin)
-
-
-
 app.use('/commentaire', commentaireRouter)
 app.use('/categorie', categorieRouter)
+app.use('/update',categorieAdmin )
+
+
 
 
 

@@ -19,7 +19,7 @@ exports.adminCategorie =  async(req, res) => {
     })
 }
 
-// rendre View Admin:
+// rendre View Admin for add Categorie:
 exports.adminAddCategorie = (req,res) => {
     res.render('./admin/add-category' ,{
         layout: 'admin'
@@ -27,16 +27,16 @@ exports.adminAddCategorie = (req,res) => {
 }
 
 
+
   
-    // Create a 
+    // Create a categorie
     exports.create = (req, res) => {
         
-        // Create a Tutorial
         const category = {
           name: req.body.name,
         };
       
-        // Save Tutorial in the database
+        // Save Cate in the database
         Categorie.create(category)
           .then(data => {
             res.redirect('/admin/categories');
@@ -45,11 +45,31 @@ exports.adminAddCategorie = (req,res) => {
             res.status(500).send({
               message:
                 err.message || "Some error occurred while creating the Tutorial."
+            })
+          })
+      };
+
+      // delete a categorie : 
+      exports.Admindelete = (req, res) => {
+        const id = req.params.id;
+      
+        Categorie.destroy({
+          where: { id: id }
+        })
+          .then(num => {
+            if (num == 1) {
+              res.redirect('/admin/categories');
+            } else {
+              res.send({
+                message: `Cannot delete categorie with id=${id}. Maybe categorie was not found!`
+              });
+            }
+          })
+          .catch(err => {
+            res.status(500).send({
+              message: "Could not delete Categorie with id=" + id
             });
           });
       };
-
-
-
 
 
