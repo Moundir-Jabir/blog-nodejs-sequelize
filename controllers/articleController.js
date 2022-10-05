@@ -37,27 +37,45 @@ exports.adminUpdatePost = (req,res) => {
 }
 
 
+// exports.create = (req, res) => {
+//   // console.log(req.body)
+//   Articles.create(req.body)
+//     .then(data => {
+//       res.send(data);
+//     }).catch(err => {
+//       res.status(500).send({
+//         message:
+//           err.message || "Some error occurred while creating the Tutorial."
+//       });
+//     });
+// }
+
+
+
+
 exports.create = (req, res) => {
-  // console.log(req.body)
-  Articles.create(req.body)
+        
+  const posts = {
+    title: "req.body.title",
+    image: "req.body.image",
+    content: "req.body.conten",
+
+  };
+  Articles.create(posts)
     .then(data => {
-      res.send(data);
-    }).catch(err => {
+      res.redirect('/admin/posts');
+    })
+    .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Tutorial."
-      });
-    });
-}
+          err.message || "Some error occurred while creating the post."
+      })
+    })
+};
 
-// exports.getArticlebyid = async(req, res) =>{
-//   const id = req.params.id;
-//   let categories = await getCategorie()
-//   let articles = await getarticles()
-//   res.render('index', {
-//       articles,categories
-//   })
-// }
+
+
+
 
 const getArticlebyid = exports.getArticlebyid = (id) => {
   return Articles.findByPk(id,
