@@ -87,11 +87,39 @@ exports.adminDeletePost = (req,res) => {
 }
 
 
-exports.adminUpdatePost = (req,res) => {
+exports.adminUpdatePost = async(req,res) => {
+  const id = req.params.id;
+  const Category = await Categorie.findAll(
+    {
+      raw: true,
+      nest: true,
+    })
+    const article = await Articles.findByPk(id,
+      {
+        raw: true,
+        nest: true,
+      })
     
+  res.render('./admin/update-post' ,{
+    Category,
+    article,
+      layout: 'admin'
+  })
   
 }
-
+exports.adminUpdateCategorie = async (req, res) => {
+  let id = req.params.id;
+  let cat = await Categorie.findOne(
+    {
+      where: { id: id }
+    })
+  let i = cat.name
+  res.render('./admin/update-category', {
+    i, id,
+    layout: 'admin'
+  })
+  console.log(i)
+}
 
 // exports.create = (req, res) => {
 //   // console.log(req.body)
@@ -137,7 +165,27 @@ exports.create = async(req, res) => {
 };
 
 
+exports.update = (req, res) => {
+  const id = req.params.id;
 
+  Articles.update(req.body, {
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.redirect('/./admin/posts')
+      } else {
+        res.send({
+          message: `Cannot update this post with id=${id}. Maybe post was not found or req.body is empty!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating post with id=" + id
+      });
+    });
+};
 
 
 const getArticlebyid = exports.getArticlebyid = (id) => {
