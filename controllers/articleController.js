@@ -25,11 +25,28 @@ exports.adminCreatePosts = (req,res) => {
 }
 
 exports.adminGetPostById = (req,res) => {
-
-  res.render('./admin/post-detail' ,{
+  const id = req.params.id;
+ const article = Articles.findByPk(id,
+    {
+      raw: true,
+      nest: true,
+      include: Categorie
+    })
+ 
+    res.render('./admin/post-detail' ,{
+      article,
       layout: 'admin'
-  })
+      
+
+    })
 }
+
+
+
+
+
+
+
 exports.adminUpdatePost = (req,res) => {
   res.render('./admin/update-post' ,{
       layout: 'admin'
@@ -56,9 +73,9 @@ exports.adminUpdatePost = (req,res) => {
 exports.create = (req, res) => {
         
   const posts = {
-    title: "req.body.title",
-    image: "req.body.image",
-    content: "req.body.conten",
+    title: req.body.title,
+    image: req.body.image,
+    content: req.body.content
 
   };
   Articles.create(posts)
