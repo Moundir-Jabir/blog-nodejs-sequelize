@@ -19,6 +19,12 @@ const Articles = db.define('article', {
     content: {
         type: DataTypes.STRING,
         allowNull: false
+    }, content2: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }, content3: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 }
 )
