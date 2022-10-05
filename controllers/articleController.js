@@ -107,19 +107,7 @@ exports.adminUpdatePost = async(req,res) => {
   })
   
 }
-exports.adminUpdateCategorie = async (req, res) => {
-  let id = req.params.id;
-  let cat = await Categorie.findOne(
-    {
-      where: { id: id }
-    })
-  let i = cat.name
-  res.render('./admin/update-category', {
-    i, id,
-    layout: 'admin'
-  })
-  console.log(i)
-}
+
 
 // exports.create = (req, res) => {
 //   // console.log(req.body)
