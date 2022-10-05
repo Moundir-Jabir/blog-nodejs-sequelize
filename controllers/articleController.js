@@ -1,5 +1,7 @@
 const { Articles } = require('../models/Articles')
+const { Avis } = require('../models/Avis')
 const { Categorie } = require('../models/Categorie')
+const { Commentaire } = require('../models/Commentaire')
 
 const getarticles = exports.getarticles = () => {
   return Articles.findAll({
@@ -24,13 +26,15 @@ exports.adminCreatePosts = (req,res) => {
   })
 }
 
-exports.adminGetPostById = (req,res) => {
+exports.adminGetPostById = async(req,res) => {
   const id = req.params.id;
- const article = Articles.findByPk(id,
+  const article = await Articles.findByPk(id,
     {
       raw: true,
       nest: true,
-      include: Categorie
+      include: Categorie,
+      include: Commentaire,
+      include: Avis
     })
  
     res.render('./admin/post-detail' ,{
@@ -39,6 +43,9 @@ exports.adminGetPostById = (req,res) => {
       
 
     })
+
+    console.log(article)
+    
 }
 
 
