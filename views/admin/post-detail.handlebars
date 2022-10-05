@@ -23,6 +23,7 @@
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star"></span>
                                 <span class="fa fa-star"></span>
+                                <div class="d-none" id="postRates"></div>
                                 <div class="actions mt-1 d-none" id="action-rate">
                                     <a href="details/update-rate" class="text-primary">Edit</a>
                                     <a href="#" class="text-danger mx-2">Remove</a>
@@ -44,30 +45,16 @@
                 </article>
                 <div class="w-full md:text-left md:flex-row shadow bg-white mt-10 mb-10 p-6">
                     <h5 class="mb-3 text-2xl text-primary">People's Opinion</h5>
+                     {{#each comments}}
                     <div class="cmnt text-dark mb-1">
-                        <p class="font-semibold text-xl">David</p>
-                        <p class="pt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel neque non libero suscipit suscipit eu eu urna.</p>
+                        <p class="font-semibold text-xl">{{username}}</p>
+                        <p class="pt-2">{{contenue}}.</p>
                         <div class="actions">
                             <a href="details/update-comment" class="text-primary">Edit</a>
                             <a href="#" class="text-danger mx-2">Remove</a>
                         </div>
                     </div>
-                    <div class="cmnt text-dark mb-1">
-                        <p class="font-semibold text-xl">David</p>
-                        <p class="pt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel neque non libero suscipit suscipit eu eu urna.</p>
-                        <div class="actions">
-                            <a href="details/update-comment" class="text-primary">Edit</a>
-                            <a href="#" class="text-danger mx-2">Remove</a>
-                        </div>
-                    </div>
-                    <div class="cmnt text-dark mb-1">
-                        <p class="font-semibold text-xl">David</p>
-                        <p class="pt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel neque non libero suscipit suscipit eu eu urna.</p>
-                        <div class="actions">
-                            <a href="details/update-comment" class="text-primary">Edit</a>
-                            <a href="#" class="text-danger mx-2">Remove</a>
-                        </div>
-                    </div>
+                    {{/each}}
                 </div>
             </div>
 
