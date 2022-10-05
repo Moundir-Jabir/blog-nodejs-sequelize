@@ -7,12 +7,27 @@ exports.adminUpdateComment = (req,res) => {
 }
 
 exports.createComment = (req, res, id) => {
-    Commentaire.create(req.body).then(e => res.json({ message: 'post created' }))
-    .catch(err => res.status(400).json({err}))
+    const comment = {
+        username: req.body.username,
+        contenue: req.body.contenue,
+        articleId: req.params.idPost
+    }
+    Commentaire.create(comment)
+        .then(data => {
+            res.redirect('/'+comment.articleId);
+        })
+        .catch(err => {
+            res.status(500).send({
+            message:
+                err.message || "Something went wrong."
+            })
+        })
 }
 
-exports.getCommentByPost = (req, res) => {
-    console.log(req.params.id)
-    Commentaire.findAll().then(data => res.json({data}))
-        .catch(err => res.status(400).json({err}))
+exports.getCommentsByPost = (id) => {
+    return Commentaire.findAll({ 
+        where:  {articleId: id},
+        raw: true,
+        nest: true
+    })
 }
