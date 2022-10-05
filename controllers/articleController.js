@@ -88,9 +88,8 @@ exports.adminDeletePost = (req,res) => {
 
 
 exports.adminUpdatePost = (req,res) => {
-  res.render('./admin/update-post' ,{
-      layout: 'admin'
-  })
+    
+  
 }
 
 
