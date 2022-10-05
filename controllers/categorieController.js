@@ -1,4 +1,5 @@
 const { log } = require('handlebars')
+const { where } = require('sequelize')
 const { Categorie } = require('../models/categorie')
 
 
@@ -32,7 +33,9 @@ exports.adminAddCategorie = (req,res) => {
 
 exports.adminUpdateCategorie = async (req,res) => {
   let id = req.params.id;
-  let cat = await Categorie.findOne({id:id})
+  let cat = await Categorie.findOne(
+    {where: { id: id }
+  })
   let i = cat.name
   res.render('./admin/update-category' ,  { i , id,
         layout: 'admin'
@@ -74,13 +77,13 @@ exports.adminUpdateCategorie = async (req,res) => {
               res.redirect('/admin/categories')
             } else {
               res.send({
-                message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`
+                message: `Cannot update this categorie with id=${id}. Maybe Categorie was not found or req.body is empty!`
               });
             }
           })
           .catch(err => {
             res.status(500).send({
-              message: "Error updating Tutorial with id=" + id
+              message: "Error updating Categorie with id=" + id
             });
           });
       };
