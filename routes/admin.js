@@ -16,5 +16,7 @@ router.get('/posts/details/update-comment', adminUpdateComment)
 router.get('/categories', adminCategorie)
 router.get('/categorie/add', adminAddCategorie)
 router.get('/categorie/delete/:id', Admindelete)
+router.get('/categorie/update/:id', adminUpdateCategorie)
+
 // Router Delete Data : 
 module.exports = router;

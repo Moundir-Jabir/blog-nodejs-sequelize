@@ -12,7 +12,6 @@ const path = require('path')
 const commentaireRouter = require('./routes/commentaire')
 const categorieRouter = require('./routes/categorie');
 const articleRouter = require('./routes/article');
-
 const categorieAdmin = require('./routes/admin');
 
 db.authenticate()
@@ -24,26 +23,24 @@ db.authenticate()
     .catch((error => console.error('Unable to connect to the database:', error)))
 
 app.use(express.json())
-
 app.set('view engine', 'handlebars')
 app.set('views', './views')
 
 app.engine('handlebars', engine({ defaultLayout: 'main' }))
 app.use(express.static(path.join(__dirname, 'public')))
 
-
-app.get('/', async(req, res) => {
+app.get('/', async (req, res) => {
     let categories = await getCategorie()
-    let articles = await getarticles()  
+    let articles = await getarticles()
     res.render('index', {
-        articles,categories
+        articles, categories
     })
 })
-app.get('/:id', async(req, res) => {
+app.get('/:id', async (req, res) => {
     let categories = await getCategorie()
     let article = await getArticlebyid(req.params.id)
     res.render('article', {
-        article,categories
+        article, categories
     })
 })
 
@@ -52,13 +49,7 @@ app.use('/commentaire', commentaireRouter)
 app.use('/categorie', categorieRouter)
 app.use('/article', articleRouter)
 
-
-
-
-
 const port = process.env.PORT || 4000
 app.listen(port, () => {
     console.log(`app running on port ${port}`)
 })
-
-
