@@ -1,0 +1,59 @@
+
+  
+        <div class="sl-pagebody">
+            <div class="w-75 mx-auto bg-white rounded px-5 py-2 shadow">
+              <hr>
+                <div class="card">
+                    <div class="table-wrapper">
+                      <table id="datatable2" class="table display responsive nowrap">
+                        <thead>
+                          <tr>
+                            <th class="wd-15p">Avis Id</th>
+                            <th class="wd-15p">Username</th>
+                            <th class="wd-15p">Avis Number</th>
+                            <th class="wd-10p text-center">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {{#each data}}
+                                <tr>
+                                    <td>{{avis_id}}</td>
+                                    <td>{{username}}</td>
+                                    <td>{{avis_number}}</td>
+                                    <td class="d-flex align-items-center justify-content-center">
+                                        <a href="/admin/posts/details/avis/update-avis/{{avis_id}}" class="text-primary">Update</a>
+                                        <div style="width: 40px;"></div>
+                                        <a href="/admin/posts/details/avis/remove-avis/{{avis_id}}/{{articleId}}" class="text-danger">Remove</a>
+                                    </td>
+                                </tr> 
+                            {{/each}}
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div><!-- sl-pagebody -->
+
+    </div><!-- sl-mainpanel -->
+
+    <script src="lib/jquery/jquery.js"></script>
+    <script src="lib/popper.js/popper.js"></script>
+    <script src="lib/bootstrap/bootstrap.js"></script>
+    <script src="lib/jquery-ui/jquery-ui.js"></script>
+    <script src="lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+    <script src="lib/jquery.sparkline.bower/jquery.sparkline.min.js"></script>
+    <script src="lib/d3/d3.js"></script>
+    <script src="lib/rickshaw/rickshaw.min.js"></script>
+    <script src="lib/chart.js/Chart.js"></script>
+    <script src="lib/Flot/jquery.flot.js"></script>
+    <script src="lib/Flot/jquery.flot.pie.js"></script>
+    <script src="lib/Flot/jquery.flot.resize.js"></script>
+    <script src="lib/flot-spline/jquery.flot.spline.js"></script>
+    
+    <script src="js/fill-details.js"></script>
+    <script src="js/starlight.js"></script>
+    <script src="js/ResizeSensor.js"></script>
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>

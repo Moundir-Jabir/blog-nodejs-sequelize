@@ -58,6 +58,10 @@
                 <p href="#" class="text-sm pb-8">Published on : {{article.createdAt}}</p>
                 <h1 class="text-2xl font-bold pb-3">Introduction</h1>
                 <p class="pb-3">{{article.content}}</p>
+                <h1 class="text-2xl font-bold pb-3">Heading</h1>
+                <p class="pb-3">{{article.content2}}.</p>
+                <h1 class="text-2xl font-bold pb-3">Conclusion</h1>
+                <p class="pb-3">{{article.content3}}</p>
             </div>
         </article>
         <form action="/commentaire/createComment/{{article.id}}" method="post">
