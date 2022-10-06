@@ -49,7 +49,7 @@ app.use('/commentaire', commentaireRouter)
 app.use('/categorie', categorieRouter)
 app.use('/article', articleRouter)
 
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 3000
 app.listen(port, () => {
     console.log(`app running on port ${port}`)
 })

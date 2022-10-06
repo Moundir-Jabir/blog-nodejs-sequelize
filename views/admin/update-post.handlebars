@@ -4,42 +4,41 @@
 
             <div class="w-75 mx-auto bg-white rounded px-5 py-3 main-form">
                 <h5 class="text-center py-2" id="h5-add">Update The Post</h5>
-                <form action="action.php" method="post">
+                <form action="/article/update/{{article.id}}" method="post">
                     <div class="d-block">
 
                       <div class="d-block">
                         <label for="post-title">Title</label>
-                        <input type="text" name="post-title" id="post-title" class="form-control">
+                        <input type="text" name="title" value="{{article.title}}" id="post-title" class="form-control">
                     </div>
-
                     <div class="d-block">
                         <label for="post-image" class="mt-3">Image</label>
-                        <input type="file" name="post-image" id="post-image" class="form-control">
+                        <input type="file" name="image" id="post-image" class="form-control">
                     </div>
 
                     <div class="d-block">
                         <label for="post-category" class="mt-3">Category</label>
-                        <select class="form-control" id="post-category">
+                        <select class="form-control" id="post-category" name="category">
                             <option value="none" selected disabled hidden>Select Category</option>
-                            <option value="sport">Sport</option>
-                            <option value="sport">Sport</option>
-                            <option value="sport">Sport</option>
+                            {{#each Category}}
+                                    <option value ="{{id}}">{{name}}</option>
+                                {{/each}}
                         </select>
                     </div>
 
                     <div class="d-block">
                         <label for="post-intro" class="mt-3">Introduction</label>
-                        <textarea id="post-intro" class="form-control" rows="5"></textarea>
+                        <textarea id="post-intro"  name="content" class="form-control" rows="5">{{article.content}}</textarea>
                     </div>
 
                     <div class="d-block">
                         <label for="post-body" class="mt-3">Body</label>
-                        <textarea id="post-body" class="form-control" rows="5"></textarea>
+                        <textarea id="post-body"  name="content2"  class="form-control" rows="5">{{article.content2}}</textarea>
                     </div>
 
                     <div class="d-block">
                         <label for="post-conc" class="mt-3">Conclusion</label>
-                        <textarea id="post-conc" class="form-control" rows="5"></textarea>
+                        <textarea id="post-conc"  name="content3" class="form-control" rows="5">{{article.content3}}</textarea>
                     </div>
 
                       <button type="submit" class="btn btn-primary my-3 rounded crs">Submit</button>
