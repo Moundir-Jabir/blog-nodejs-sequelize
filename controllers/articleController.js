@@ -195,5 +195,19 @@ exports.adminGetPostById = async (req, res) => {
     article, comments, avis,
     layout: 'admin'
   })
-  console.log(avis)
+  // console.log(avis)
 }
+
+exports.getPostsByCategorie = (req, res) => {
+  const id = req.params.idCategorie
+  Articles.findAll({
+    where:{categorieId: id},
+    raw: true,
+    nest: true
+  }) .then(data => {
+    res.render('./',
+      data
+    )
+    console.log(data)
+  })
+} 

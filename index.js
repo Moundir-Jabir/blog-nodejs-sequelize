@@ -4,7 +4,7 @@ const app = express()
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const { engine } = require('express-handlebars')
-const { getarticles, getArticlebyid } = require('./controllers/articleController')
+const { getarticles, getArticlebyid, getPostsByCategorie } = require('./controllers/articleController')
 const { getCategorie } = require('./controllers/categorieController')
 const path = require('path')
 
@@ -35,10 +35,12 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/', async (req, res) => {
     let categories = await getCategorie()
-    let articles = await getarticles()
+    let data = await getarticles()
+    // let postsByCate = await getPostsByCategorie(req.params.id)
     res.render('index', {
-        articles, categories
+        data, categories
     })
+    console.log(data);
 })
 app.get('/:id', async (req, res) => {
     let categories = await getCategorie()

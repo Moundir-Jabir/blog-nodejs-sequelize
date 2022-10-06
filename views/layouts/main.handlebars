@@ -33,7 +33,7 @@
             <nav>
                 <ul class="flex items-center justify-between font-bold text-sm text-white uppercase no-underline">
                     {{#each categories}}
-                    <li><a class="hover:text-gray-200 hover:underline px-4" href="#">{{name}}</a></li>
+                        <li><a class="hover:text-gray-200 hover:underline px-4" href="/article/getPostsByCategorie/{{id}}">{{name}}</a></li>
                     {{/each}}
                 </ul>
             </nav>
@@ -81,7 +81,7 @@
             <div
                 class="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
                 {{#each categories}}
-                <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">{{name}}</a>
+                    <a href="/article/getPostsByCategorie/{{id}}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">{{name}}</a>
                 {{/each}}
             </div>
         </div>
