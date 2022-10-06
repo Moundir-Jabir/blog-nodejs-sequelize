@@ -1,4 +1,31 @@
+const { Articles } = require('../models/Articles')
 const { Commentaire } = require('../models/Commentaire')
+
+exports.createComment = (req, res, id) => {
+    const comment = {
+        username: req.body.username,
+        contenue: req.body.contenue,
+        articleId: req.params.idPost
+    }
+    Commentaire.create(comment)
+        .then(data => {
+            res.redirect('/'+comment.articleId)
+        })
+        .catch(err => {
+            res.status(500).send({
+            message:
+                err.message || "Something went wrong."
+            })
+        })
+}
+
+exports.getCommentsByPost = (id) => {
+    return Commentaire.findAll({ 
+        where:  {articleId: id},
+        raw: true,
+        nest: true
+    })
+}
 
 exports.adminGetCommentById = async (req,res) => {
     const id = req.params.idComment
@@ -27,33 +54,25 @@ exports.adminUpdateComment = (req, res) => {
         })
         .catch(err => {
             res.send({
-                message: 'something went wrong'
+                message: 'something went wrong' + err
             })
         })
 }
 
-exports.createComment = (req, res, id) => {
-    const comment = {
-        username: req.body.username,
-        contenue: req.body.contenue,
-        articleId: req.params.idPost
-    }
-    Commentaire.create(comment)
+exports.adminRemoveComment = async (req, res) => {
+    const id = req.params.idComment
+    const postId = req.params.idPost
+    console.log(postId)
+    Commentaire.destroy({
+        where: {id: id}
+    })
         .then(data => {
-            res.redirect('/'+comment.articleId)
+            // res.send(id+'temse7')
+            res.redirect('/./admin/posts/details/'+postId)
         })
         .catch(err => {
-            res.status(500).send({
-            message:
-                err.message || "Something went wrong."
+            res.send({
+                message: 'something went wrong' + err
             })
         })
-}
-
-exports.getCommentsByPost = (id) => {
-    return Commentaire.findAll({ 
-        where:  {articleId: id},
-        raw: true,
-        nest: true
-    })
 }
