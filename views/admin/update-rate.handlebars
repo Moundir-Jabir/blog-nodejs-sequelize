@@ -3,12 +3,13 @@
 
             <div class="w-75 mx-auto bg-white rounded px-5 py-3">
                 <h5 class="text-center py-2">Update Rate</h5>
-                <form action="action.php" method="post">
+                <form action="/admin/posts/details/avis/update-avis/{{avis.avis_id}}" method="post">
                     <div class="d-block">
 
                         <div class="d-block">
                             <label for="number-of-stars">Star Rating</label>
-                            <input type="number" name="number-of-stars" id="number-of-stars" class="form-control">
+                            <input type="hidden" name="articleId" value="{{avis.articleId}}">
+                            <input type="number" name="numberOfStars" id="number-of-stars" class="form-control" value="{{avis.avis_number}}">
                         </div>
 
                         <button type="submit" class="btn btn-primary my-3 rounded crs">Submit</button>
