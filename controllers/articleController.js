@@ -105,7 +105,7 @@ exports.adminUpdatePost = async(req,res) => {
     article,
       layout: 'admin'
   })
-  
+ 
 }
 
 
@@ -155,8 +155,17 @@ exports.create = async(req, res) => {
 
 exports.update = (req, res) => {
   const id = req.params.id;
+console.log(id)
+  const posts = {
+    title: req.body.title,
+    image: req.body.image,
+    categorieId: req.body.category,
+    content: req.body.content,
+    content2: req.body.content2,
+    content3: req.body.content3
 
-  Articles.update(req.body, {
+  };
+  Articles.update(posts, {
     where: { id: id }
   })
     .then(num => {
