@@ -1,9 +1,35 @@
 const { Commentaire } = require('../models/Commentaire')
 
-exports.adminUpdateComment = (req,res) => {
-    res.render('./admin/update-comment' ,{
-        layout: 'admin'
+exports.adminGetCommentById = async (req,res) => {
+    const id = req.params.idComment
+    const comment = await Commentaire.findByPk(id, {
+        raw: true,
+        nest: true
     })
+    res.render('./admin/update-comment' ,{
+        layout: 'admin',
+        comment
+    })
+}
+
+exports.adminUpdateComment = (req, res) => {
+    const id = req.params.idComment
+    const x = {
+        username: req.body.commentAuthor,
+        contenue: req.body.commentContent
+    }
+    Commentaire.update(x, {
+        where: {id: id}
+    })
+        .then(data => {
+            // res.send(x)
+            res.redirect('/./admin/posts/details/'+req.body.articleId)
+        })
+        .catch(err => {
+            res.send({
+                message: 'something went wrong'
+            })
+        })
 }
 
 exports.createComment = (req, res, id) => {
@@ -14,7 +40,7 @@ exports.createComment = (req, res, id) => {
     }
     Commentaire.create(comment)
         .then(data => {
-            res.redirect('/'+comment.articleId);
+            res.redirect('/'+comment.articleId)
         })
         .catch(err => {
             res.status(500).send({

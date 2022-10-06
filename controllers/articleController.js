@@ -1,10 +1,19 @@
 const { Articles } = require('../models/Articles')
 const { Categorie } = require('../models/Categorie')
+const { Avis } = require('../models/Avis')
+const { Commentaire } = require('../models/Commentaire')
+const sequelize = require('sequelize')
 
-exports.adminPosts = (req,res) => {
-  res.render('./admin/posts' ,{
-      layout: 'admin'
+exports.adminPosts = async (req,res) => {
+  const ar = await Articles.findAll({
+    raw: true,
+    nest: true
   })
+  res.render('./admin/posts' ,{
+      layout: 'admin',
+      ar
+  })
+  console.log(ar)
 }
 exports.adminCreatePosts = (req,res) => {
   res.render('./admin/add-post' ,{
@@ -59,4 +68,32 @@ exports.getArticlebyid = (id) => {
       include: Categorie
     })
   
-};
+}
+
+exports.adminGetPostById = async(req,res) => {
+  const id = req.params.idPost
+  const comments = await Commentaire.findAll({
+    where: {articleId : id},
+    raw: true,
+    nest: true,
+  })
+
+  const avis = await Avis.findAll({
+    where: {articleId : id},
+    raw: true,
+    nest: true,
+    attributes: [[sequelize.fn('avg', sequelize.col('avis_number')), 'avgRates']]
+  })
+
+  const article = await Articles.findByPk(id,
+    {
+      raw: true,
+      nest: true,
+    })
+ 
+    res.render('./admin/post-detail' ,{
+      article, comments, avis,
+      layout: 'admin'
+    })
+    console.log(avis)
+}
