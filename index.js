@@ -11,8 +11,12 @@ const path = require('path')
 //Routers
 const commentaireRouter = require('./routes/commentaire')
 const categorieRouter = require('./routes/categorie');
-const articleRouter = require('./routes/article');
+const articleRouter = require('./routes/article')
+const avisRouter = require('./routes/avis')
+
 const categorieAdmin = require('./routes/admin');
+const { getCommentsByPost } = require('./controllers/commentaireController')
+const { getAvisByPost } = require('./controllers/avisController')
 
 db.authenticate()
     .then(() => {
@@ -39,8 +43,10 @@ app.get('/', async (req, res) => {
 app.get('/:id', async (req, res) => {
     let categories = await getCategorie()
     let article = await getArticlebyid(req.params.id)
+    let comments = await getCommentsByPost(req.params.id)
+    let avis = await getAvisByPost(req.params.id)
     res.render('article', {
-        article, categories
+        article, categories, comments, avis
     })
 })
 
@@ -48,6 +54,7 @@ app.use('/admin', categorieAdmin)
 app.use('/commentaire', commentaireRouter)
 app.use('/categorie', categorieRouter)
 app.use('/article', articleRouter)
+app.use('/avis', avisRouter)
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {

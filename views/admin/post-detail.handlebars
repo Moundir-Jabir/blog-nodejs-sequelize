@@ -1,5 +1,37 @@
 
+   <style>
+    .d-none {
+        display: none;
+    }
+    .stars-outer {
+        position: relative;
+        display: inline-block;
+    }
 
+    .stars-inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+    }
+
+    .stars-outer::before {
+        content: "\f005 \f005 \f005 \f005 \f005";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #ccc;
+    }
+
+    .stars-inner::before {
+        content: "\f005 \f005 \f005 \f005 \f005";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #f8ce0b;
+    }
+
+   </style>
   
         <div class="sl-pagebody">
 
@@ -18,12 +50,10 @@
                         <div class="rate">
                             <a href="#" class="text-blue-700 text-sm font-bold uppercase pb-4">{{article.categorie.name}}</a>
                             <div class="cursor-pointer" id="rate11" style="height: auto;">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <div class="d-none" id="postRates"></div>
+                                <div class="d-none" id="avg-rates">{{avis.[0].avgRates}}</div>
+                                <div class="stars-outer">
+                                    <div class="stars-inner"></div>
+                                </div>
                                 <div class="actions mt-1 d-none" id="action-rate">
                                     <a href="details/update-rate" class="text-primary">Edit</a>
                                     <a href="#" class="text-danger mx-2">Remove</a>
@@ -45,15 +75,15 @@
                 </article>
                 <div class="w-full md:text-left md:flex-row shadow bg-white mt-10 mb-10 p-6">
                     <h5 class="mb-3 text-2xl text-primary">People's Opinion</h5>
-                     {{#each comments}}
-                    <div class="cmnt text-dark mb-1">
-                        <p class="font-semibold text-xl">{{username}}</p>
-                        <p class="pt-2">{{contenue}}.</p>
-                        <div class="actions">
-                            <a href="details/update-comment" class="text-primary">Edit</a>
-                            <a href="#" class="text-danger mx-2">Remove</a>
+                    {{#each comments}}
+                        <div class="cmnt text-dark mb-1">
+                            <p class="font-semibold text-xl">{{username}}</p>
+                            <p class="pt-2">{{contenue}}</p>
+                            <div class="actions">
+                                <a href="/admin/posts/details/update-comment/{{id}}" class="text-primary">Edit</a>
+                                <a href="/admin/posts/details/remove-comment/{{id}}/{{articleId}}" class="text-danger mx-2">Remove</a>
+                            </div>
                         </div>
-                    </div>
                     {{/each}}
                 </div>
             </div>
@@ -83,6 +113,14 @@
       document.getElementById('rate11').addEventListener('click', () => {
         document.getElementById('action-rate').classList.toggle('d-none')
       })
+        const avgRates = +document.querySelector('#avg-rates').textContent
+        console.log(avgRates)
+        const starsTotal = 5
+        document.addEventListener('DOMContentLoaded', () => {
+            const starPer = (avgRates / starsTotal) * 100
+            const starPerRou = `${Math.round(starPer / 10) * 10}%`
+            document.querySelector('.stars-inner').style.width = starPerRou
+        })
     </script>
   </body>
 </html>

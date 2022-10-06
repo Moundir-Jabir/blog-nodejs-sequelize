@@ -4,17 +4,17 @@
 
             <div class="w-75 mx-auto bg-white rounded px-5 py-3 main-form">
                 <h5 class="text-center py-2" id="h5-add">Update Comment</h5>
-                <form action="action.php" method="post">
+                <form action="/admin/posts/details/update-comment/{{comment.id}}" method="post">
                     <div class="d-block">
-
+                        <input type="hidden" name="articleId" value="{{comment.articleId}}">
                         <div class="d-block">
-                            <label for="comment-author">Author</label>
-                            <input type="text" name="comment-author" id="comment-author" class="form-control">
+                            <label for="commentAuthor">Author</label>
+                            <input type="text" name="commentAuthor" id="commentAuthor" class="form-control" value="{{comment.username}}">
                         </div>
 
                         <div class="d-block">
-                            <label for="comment-content" class="mt-2">Content</label>
-                            <input type="text" name="comment-content" id="comment-content" class="form-control">
+                            <label for="commentContent" class="mt-2">Content</label>
+                            <input type="text" name="commentContent" id="commentContent" class="form-control" value="{{comment.contenue}}">
                         </div>
 
                         <button type="submit" class="btn btn-primary my-3 rounded crs">Submit</button>
