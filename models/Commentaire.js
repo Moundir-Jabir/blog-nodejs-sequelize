@@ -1,16 +1,23 @@
 const { DataTypes } = require('sequelize')
 const db = require('./config')
+const { Articles } = require('./Articles')
 
-const Commentaire = db.define('Categorie', {
+const Commentaire = db.define('commentaire', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    name: {
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    contenue: {
         type: DataTypes.STRING,
         allowNull: false
     }
 }
 )
+Articles.hasMany(Commentaire);
+Commentaire.belongsTo(Articles)
 module.exports = { Commentaire }

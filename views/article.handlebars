@@ -1,0 +1,87 @@
+<style>
+    .d-none {
+        display: none;
+    }
+
+    .stars-outer {
+        position: relative;
+        display: inline-block;
+    }
+
+    .stars-inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+    }
+
+    .stars-outer::before {
+        content: "\f005 \f005 \f005 \f005 \f005";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #ccc;
+    }
+
+    .stars-inner::before {
+        content: "\f005 \f005 \f005 \f005 \f005";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #f8ce0b;
+    }
+</style>
+<div class="container mx-auto flex flex-wrap py-6">
+
+    <!-- Post Section -->
+    <section class="w-full md:w-2/3 mx-auto flex flex-col items-center px-3">
+
+        <article class="flex flex-col shadow my-4">
+            <!-- Article Image -->
+            <a href="#" class="hover:opacity-75">
+                <img style="width:100%;" src="https://source.unsplash.com/collection/1346951/1000x500?sig=1">
+            </a>
+            <div class="bg-white flex flex-col justify-start p-6">
+                <div class="d-none" id="avg-rates">{{avis.[0].avgRates}}</div>
+                <div class="w-full flex justify-center">
+                    <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                    </div>
+                </div>
+                <form action="/avis/createAvis/{{article.id}}" method="post">
+                    <input type="text" name="username" style="border: 2px black solid;" placeholder="username">
+                    <input type="number" name="avisNumber" style="border: 2px black solid;" placeholder="1-5 stars">
+                    <input type="submit" value="submit" style="border: 2px black solid;">
+                </form>
+                <a href="#" class="text-blue-700 text-sm font-bold uppercase pb-4">{{article.categorie.name}}</a>
+                <a href="#" class="text-3xl font-bold hover:text-gray-700 pb-4">{{article.title}}</a>
+                <p href="#" class="text-sm pb-8">Published on : {{article.createdAt}}</p>
+                <h1 class="text-2xl font-bold pb-3">Introduction</h1>
+                <p class="pb-3">{{article.content}}</p>
+            </div>
+        </article>
+        <form action="/commentaire/createComment/{{article.id}}" method="post">
+            <input type="text" name="username" style="border: 2px black solid;" placeholder="username">
+            <input type="text" name="contenue" style="border: 2px black solid;" placeholder="comment content">
+            <input type="submit" value="submit" style="border: 2px black solid;">
+        </form>
+        {{#each comments}}
+        <div class="w-full flex flex-col text-start md:text-left md:flex-row shadow bg-white mt-3 mb-3 p-3">
+            <div class="flex-1 flex flex-col justify-center md:justify-start">
+                <p class="font-semibold text-2xl">{{username}}</p>
+                <p class="pt-2">{{contenue}}</p>
+            </div>
+        </div>
+        {{/each}}
+    </section>
+</div>
+<script>
+    const avgRates = +document.querySelector('#avg-rates').textContent
+    console.log(avgRates)
+    const starsTotal = 5
+    document.addEventListener('DOMContentLoaded', () => {
+        const starPer = (avgRates / starsTotal) * 100
+        const starPerRou = `${Math.round(starPer / 10) * 10}%`
+        document.querySelector('.stars-inner').style.width = starPerRou
+    })
+</script>

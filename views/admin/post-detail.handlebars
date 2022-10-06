@@ -1,0 +1,126 @@
+
+   <style>
+    .d-none {
+        display: none;
+    }
+    .stars-outer {
+        position: relative;
+        display: inline-block;
+    }
+
+    .stars-inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+    }
+
+    .stars-outer::before {
+        content: "\f005 \f005 \f005 \f005 \f005";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #ccc;
+    }
+
+    .stars-inner::before {
+        content: "\f005 \f005 \f005 \f005 \f005";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #f8ce0b;
+    }
+
+   </style>
+  
+        <div class="sl-pagebody">
+
+            <div class="d-flex justify-content-center my-3">
+              <a href="/admin/posts/details/update/{{article.id}}" class="btn btn-primary rounded mx-2">Update Post</a> 
+              <a href="/admin/posts/details/delete/{{article.id}}" class="btn btn-danger rounded">Remove Post</a> 
+            </div>
+
+            <div class="w-75 mx-auto bg-white rounded px-5 py-3 main-form">
+                <article class="flex flex-col shadow my-4">
+                    <!-- Article Image -->
+                    <a href="#" class="hover:opacity-75 w-100">
+                        <img src="https://source.unsplash.com/collection/1346951/1000x500?sig=1" style="width: 100% !important;">
+                    </a>
+                    <div class="bg-white flex flex-col justify-start p-6 text-dark">
+                        <div class="rate">
+                            <a href="#" class="text-blue-700 text-sm font-bold uppercase pb-4">{{article.categorie.name}}</a>
+                            <div class="cursor-pointer" id="rate11" style="height: auto;">
+                                <div class="d-none" id="avg-rates">{{avis.[0].avgRates}}</div>
+                                <div class="stars-outer">
+                                    <div class="stars-inner"></div>
+                                </div>
+                                <div class="actions mt-1 d-none" id="action-rate">
+                                    <a href="details/update-rate" class="text-primary">Edit</a>
+                                    <a href="#" class="text-danger mx-2">Remove</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="text-3xl font-bold hover:text-gray-700 pb-4">{{article.title}}</a>
+                        <p href="#" class="text-sm pb-8">
+                            By <a href="#" class="font-semibold hover:text-gray-800"></a>{{article.createdAt}}
+                        </p>
+                        <h1 class="text-2xl font-bold pb-3">Introduction</h1>
+                        <p class="pb-3">{{article.content}}.</p>
+                        <h1 class="text-2xl font-bold pb-3">Heading</h1>
+                        <p class="pb-3">{{article.content2}}.</p>
+                       
+                        <h1 class="text-2xl font-bold pb-3">Conclusion</h1>
+                        <p class="pb-3">{{article.content3}}</p>
+                    </div>
+                </article>
+                <div class="w-full md:text-left md:flex-row shadow bg-white mt-10 mb-10 p-6">
+                    <h5 class="mb-3 text-2xl text-primary">People's Opinion</h5>
+                    {{#each comments}}
+                        <div class="cmnt text-dark mb-1">
+                            <p class="font-semibold text-xl">{{username}}</p>
+                            <p class="pt-2">{{contenue}}</p>
+                            <div class="actions">
+                                <a href="/admin/posts/details/update-comment/{{id}}" class="text-primary">Edit</a>
+                                <a href="/admin/posts/details/remove-comment/{{id}}/{{articleId}}" class="text-danger mx-2">Remove</a>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+
+        </div><!-- sl-pagebody -->
+    </div><!-- sl-mainpanel -->
+
+    <script src="lib/jquery/jquery.js"></script>
+    <script src="lib/popper.js/popper.js"></script>
+    <script src="lib/bootstrap/bootstrap.js"></script>
+    <script src="lib/jquery-ui/jquery-ui.js"></script>
+    <script src="lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+    <script src="lib/jquery.sparkline.bower/jquery.sparkline.min.js"></script>
+    <script src="lib/d3/d3.js"></script>
+    <script src="lib/rickshaw/rickshaw.min.js"></script>
+    <script src="lib/chart.js/Chart.js"></script>
+    <script src="lib/Flot/jquery.flot.js"></script>
+    <script src="lib/Flot/jquery.flot.pie.js"></script>
+    <script src="lib/Flot/jquery.flot.resize.js"></script>
+    <script src="lib/flot-spline/jquery.flot.spline.js"></script>
+
+    <script src="js/starlight.js"></script>
+    <script src="js/ResizeSensor.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/posts.js"></script>
+    <script>
+      document.getElementById('rate11').addEventListener('click', () => {
+        document.getElementById('action-rate').classList.toggle('d-none')
+      })
+        const avgRates = +document.querySelector('#avg-rates').textContent
+        console.log(avgRates)
+        const starsTotal = 5
+        document.addEventListener('DOMContentLoaded', () => {
+            const starPer = (avgRates / starsTotal) * 100
+            const starPerRou = `${Math.round(starPer / 10) * 10}%`
+            document.querySelector('.stars-inner').style.width = starPerRou
+        })
+    </script>
+  </body>
+</html>
