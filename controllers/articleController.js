@@ -4,6 +4,16 @@ const { Categorie } = require('../models/Categorie')
 const { Commentaire } = require('../models/Commentaire')
 const sequelize = require('sequelize')
 
+exports.getArticlebyid = (id) => {
+  return Articles.findByPk(id,
+    {
+      raw: true,
+      nest: true,
+      include: Categorie
+    })
+  
+}
+
 const getarticles = exports.getarticles = () => {
   return Articles.findAll({
     raw: true,
