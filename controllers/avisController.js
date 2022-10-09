@@ -37,7 +37,7 @@ exports.adminAvisByPost = (req, res) => {
         })
 }
 
-exports.createAvis = (req, res, id) => {
+exports.createAvis = (req, res) => {
     const avis = {
         username: req.body.username,
         avis_number: req.body.avisNumber,

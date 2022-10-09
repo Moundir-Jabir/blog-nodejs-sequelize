@@ -43,16 +43,23 @@
             </a>
             <div class="bg-white flex flex-col justify-start p-6">
                 <div class="d-none" id="avg-rates">{{avis.[0].avgRates}}</div>
-                <div class="w-full flex justify-center">
+                <div class="w-full flex justify-center" id="avis">
                     <div class="stars-outer">
                         <div class="stars-inner"></div>
                     </div>
                 </div>
-                <form action="/avis/createAvis/{{article.id}}" method="post">
-                    <input type="text" name="username" style="border: 2px black solid;" placeholder="username">
-                    <input type="number" name="avisNumber" style="border: 2px black solid;" placeholder="1-5 stars">
-                    <input type="submit" value="submit" style="border: 2px black solid;">
-                </form>
+                <div class="d-none bg-black bg-opacity-50 fixed inset-0 overflow-y-scroll flex w-full h-screen justify-center items-center" id="overlay">
+                    <form action="/avis/createAvis/{{article.id}}" method="post" class="w-3/12 mx-auto">
+                        <svg class="h-6 w-6 cursor-pointer p-1 hover:bg-gray-300 rounded-full" id="close" fill="white" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <input type="text" name="username" class="bg-gray-50 text-gray-900 text-sm rounded outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 block my-2" placeholder="username">
+                        <input type="number" name="avisNumber" class="bg-gray-50 text-gray-900 text-sm rounded outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 block my-2" placeholder="1-5 stars" min="0" max="5">
+                        <input type="submit" value="submit" class="focus:outline-none cursor-pointer text-white bg-yellow-300 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 rounded text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900 my-2">
+                    </form>
+                </div>
                 <a href="#" class="text-blue-700 text-sm font-bold uppercase pb-4">{{article.categorie.name}}</a>
                 <a href="#" class="text-3xl font-bold hover:text-gray-700 pb-4">{{article.title}}</a>
                 <p href="#" class="text-sm pb-8">Published on : {{article.createdAt}}</p>
@@ -87,5 +94,13 @@
         const starPer = (avgRates / starsTotal) * 100
         const starPerRou = `${Math.round(starPer / 10) * 10}%`
         document.querySelector('.stars-inner').style.width = starPerRou
+            const overlay = document.querySelector('#overlay')
+            const delBtn = document.querySelector('#avis')
+            const closeBtn = document.querySelector('#close')
+            const toggleModal = () => {
+                overlay.classList.toggle('d-none') 
+            }
+            delBtn.addEventListener('click', toggleModal)
+            closeBtn.addEventListener('click', toggleModal)
     })
 </script>

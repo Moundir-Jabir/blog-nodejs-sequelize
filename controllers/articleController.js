@@ -198,16 +198,20 @@ exports.adminGetPostById = async (req, res) => {
   // console.log(avis)
 }
 
-exports.getPostsByCategorie = (req, res) => {
+exports.getPostsByCategorie = async (req, res) => {
   const id = req.params.idCategorie
+  const categories = await Categorie.findAll({
+    raw: true,
+    nest: true,
+  })
   Articles.findAll({
     where:{categorieId: id},
     raw: true,
-    nest: true
-  }) .then(data => {
-    res.render('./',
-      data
-    )
-    console.log(data)
+    nest: true,
+  }) .then(articles => {
+    res.render('index', {
+      layout:'main',
+      articles, categories
+    })
   })
 } 

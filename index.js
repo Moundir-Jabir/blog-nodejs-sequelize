@@ -35,12 +35,12 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/', async (req, res) => {
     let categories = await getCategorie()
-    let data = await getarticles()
+    let articles = await getarticles()
     // let postsByCate = await getPostsByCategorie(req.params.id)
     res.render('index', {
-        data, categories
+        articles, categories
     })
-    console.log(data);
+    // console.log(data);
 })
 app.get('/:id', async (req, res) => {
     let categories = await getCategorie()
