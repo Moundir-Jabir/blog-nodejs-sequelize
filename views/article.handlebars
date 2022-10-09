@@ -30,6 +30,10 @@
         font-weight: 900;
         color: #f8ce0b;
     }
+    .hof-comment:hover {
+        font-size: xx-large;
+        color: #256D85;
+    }
 </style>
 <div class="container mx-auto flex flex-wrap py-6">
 
@@ -39,46 +43,68 @@
         <article class="flex flex-col shadow my-4">
             <!-- Article Image -->
             <a href="#" class="hover:opacity-75">
-                <img style="width:100%;" src="https://source.unsplash.com/collection/1346951/1000x500?sig=1">
+                <img style="width:100%;" class="rounded-t-lg" src="https://source.unsplash.com/collection/1346951/1000x500?sig=1">
             </a>
             <div class="bg-white flex flex-col justify-start p-6">
                 <div class="d-none" id="avg-rates">{{avis.[0].avgRates}}</div>
-                <div class="w-full flex justify-center">
+                <div class="w-full flex justify-center" id="avis">
                     <div class="stars-outer">
                         <div class="stars-inner"></div>
                     </div>
                 </div>
-                <form action="/avis/createAvis/{{article.id}}" method="post">
-                    <input type="text" name="username" style="border: 2px black solid;" placeholder="username">
-                    <input type="number" name="avisNumber" style="border: 2px black solid;" placeholder="1-5 stars">
-                    <input type="submit" value="submit" style="border: 2px black solid;">
-                </form>
-                <a href="#" class="text-blue-700 text-sm font-bold uppercase pb-4">{{article.categorie.name}}</a>
-                <a href="#" class="text-3xl font-bold hover:text-gray-700 pb-4">{{article.title}}</a>
-                <p href="#" class="text-sm pb-8">Published on : {{article.createdAt}}</p>
-                <h1 class="text-2xl font-bold pb-3">Introduction</h1>
+                <div class="d-none fixed inset-0 overflow-y-scroll flex w-full h-screen justify-center items-center" id="overlay" style="background-color: rgb(0,0,0,.5);">
+                    <form action="/avis/createAvis/{{article.id}}" method="post" style="background-color: #256D85; !important" class="p-8 w-2/5 rounded-lg">
+                    <svg class="h-6 w-6 cursor-pointer p-1 hover:bg-gray-300 rounded-full" id="close" fill="white" viewBox="0 0 20 20"> <path fill-rule="evenodd"
+d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        <label for="first_name" class="block mb-2 text-sm font-medium  text-white">Pseudo</label>
+                        <input type="text" name="username" class="bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  mb-2"  placeholder="Pseudo">
+                        <label for="first_name" class="block mb-2 text-sm font-medium  text-white">Rate This Post (Between 1-5 Stars)</label>
+                        <input type="number" name="avisNumber" class="bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-2"   placeholder="1-5 stars">
+                        <input type="submit" value="Rate This" class=" hover:bg-blue-700 text-white font-bold py-2 mx-2 px-4 rounded my-5 cursor-pointer " style="border:white 1px solid;background-color:#256D85" >
+                    </form> 
+                </div>
+
+                <a href="#" class=" text-sm font-bold uppercase pb-4" style="color:#256D85; !important">{{article.categorie.name}}</a>
+                <a href="#" class="text-3xl font-bold hover:text-gray-700 pb-4 uppercase" >{{article.title}}</a>
+                <p href="#" class="text-sm pb-8" style="color: #47B5FF;">Published on : {{article.createdAt}}</p>
+                <h1 class="text-2xl font-bold pb-3 uppercase" style="color:#256D85; !important">Introduction</h1>
                 <p class="pb-3">{{article.content}}</p>
-                <h1 class="text-2xl font-bold pb-3">Heading</h1>
+                <h1 class="text-2xl font-bold pb-3 uppercase" style="color:#256D85; !important">Heading</h1>
                 <p class="pb-3">{{article.content2}}.</p>
-                <h1 class="text-2xl font-bold pb-3">Conclusion</h1>
+                <h1 class="text-2xl font-bold pb-3 uppercase" style="color:#256D85; !important">Conclusion</h1>
                 <p class="pb-3">{{article.content3}}</p>
             </div>
         </article>
-        <form action="/commentaire/createComment/{{article.id}}" method="post">
-            <input type="text" name="username" style="border: 2px black solid;" placeholder="username">
-            <input type="text" name="contenue" style="border: 2px black solid;" placeholder="comment content">
-            <input type="submit" value="submit" style="border: 2px black solid;">
+        
+        <h2 class="text-center my-5 font-semibold text-xl cursor-pointer hof-comment" id="comments">What are your thoughts ?? <span>Click here To comment this Post</span></h2>
+
+         <div class="d-none fixed inset-0 overflow-y-scroll flex w-full h-screen justify-center items-center" id="overlay1" style="background-color: rgb(0,0,0,.5);">    
+        <form action="/commentaire/createComment/{{article.id}}" method="post" style="background-color: #256D85; !important"  class="p-8 w-2/5 rounded-lg">
+        <svg class="h-6 w-6 cursor-pointer p-1 hover:bg-gray-300 rounded-full" id="close1" fill="white" viewBox="0 0 20 20"> <path fill-rule="evenodd"
+d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <label for="Pseudo" class="block mb-2 text-sm font-medium text-white dark:text-gray-300">Pseudo</label>
+            <input type="text" name="username"  class="bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  mb-2" placeholder="Pseudo">
+           <label for="Comment" class="block mb-2 text-sm font-medium text-white dark:text-gray-300">comments</label>
+            <input type="text" name="contenue"   class="bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  mb-2" placeholder="Your Comment (feel free)">
+            <input type="submit" value="Comment" class=" hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-5 cursor-pointer " style="border:white 1px solid;background-color:#256D85">
         </form>
+        </div>
+        <h2 class=" my-5 font-semibold text-xl w-full text-center py-3 text-white rounded " style="background-color: #256D85 !important; ">All Comments</h2>
         {{#each comments}}
         <div class="w-full flex flex-col text-start md:text-left md:flex-row shadow bg-white mt-3 mb-3 p-3">
+            <img src="https://cinbiose.uqam.ca/wp-content/uploads/sites/24/blank-profile-picture-g91ef0370b_1280-1.png" style="width: 90px; margin-right:10px;" class="rounded-full" alt="Pic For The person who comment ">
             <div class="flex-1 flex flex-col justify-center md:justify-start">
-                <p class="font-semibold text-2xl">{{username}}</p>
+                <p class="text-sm mb-3">{{createdAt}}</p>
+                <p class="font-semibold text-2xl" style="color:#256D85 ;">{{username}}</p>
                 <p class="pt-2">{{contenue}}</p>
             </div>
         </div>
         {{/each}}
     </section>
 </div>
+
+
+
 <script>
     const avgRates = +document.querySelector('#avg-rates').textContent
     console.log(avgRates)
@@ -87,5 +113,21 @@
         const starPer = (avgRates / starsTotal) * 100
         const starPerRou = `${Math.round(starPer / 10) * 10}%`
         document.querySelector('.stars-inner').style.width = starPerRou
-    })
+        const overlay = document.querySelector('#overlay')
+        const overlay1 = document.querySelector('#overlay1')
+        const delBtn = document.querySelector('#avis')
+        const closeBtn = document.querySelector('#close') 
+        const comments = document.querySelector('#comments')
+        const closeBtn1 = document.querySelector('#close1') 
+        const toggleModal = () => {
+            overlay.classList.toggle('d-none') 
+        }
+        const toggleModal1 = () => {
+            overlay1.classList.toggle('d-none') 
+        }
+        delBtn.addEventListener('click', toggleModal)
+        closeBtn.addEventListener('click', toggleModal)
+        comments.addEventListener('click', toggleModal1)
+        closeBtn1.addEventListener('click', toggleModal1)
+    }) 
 </script>
