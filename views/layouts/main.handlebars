@@ -4,15 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{#if article1}}
-        <title>{{article.title}}</title>
-    {{else}}
-        {{#if categs}}
-            <title>{{categorie.[0].name}}</title>
-        {{else}}
-            <title>Blog App</title>
-        {{/if}}
-    {{/if}}
+    <title id="title">{{page}}</title>
     <!-- Tailwind -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <style>
@@ -39,7 +31,7 @@
             <nav>
                 <ul class="flex items-center justify-between font-bold text-sm text-white uppercase no-underline">
                     {{#each categories}}
-                        <li><a class="hover:text-gray-200 hover:underline px-4" href="/article/getPostsByCategorie/{{id}}">{{name}}</a></li>
+                        <li></li><a class="hover:text-gray-200 hover:underline px-4" href="/article/getPostsByCategorie/{{id}}">{{name}}</a></li>
                     {{/each}}
                 </ul>
             </nav>
@@ -87,7 +79,7 @@
             <div
                 class="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
                 {{#each categories}}
-                    <a href="/article/getPostsByCategorie/{{id}}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">{{name}}</a>
+                    <a href="/article/getPostsByCategorie/{{id}}" id="cat-name" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">{{name}}</a>
                 {{/each}}
             </div>
         </div>
@@ -106,7 +98,16 @@
         </div>
     </footer>
 
-
+    <script>
+        const title = document.querySelector('#title')
+        const catName = document.querySelectorAll('#cat-name')
+        catName.forEach(cat => {
+            if(cat.textContent == title.textContent) {
+                cat.classList.add('bg-gray-400', 'rounded')
+                cat.classList.remove('hover:bg-gray-400')
+            }
+        })
+    </script>
 </body>
 
 </html>
