@@ -204,6 +204,11 @@ exports.getPostsByCategorie = async (req, res) => {
     raw: true,
     nest: true,
   })
+  const categorie = await Categorie.findAll({
+    where: {id: id},
+    raw: true,
+    nest: true,
+  })
   Articles.findAll({
     where:{categorieId: id},
     raw: true,
@@ -211,7 +216,9 @@ exports.getPostsByCategorie = async (req, res) => {
   }) .then(articles => {
     res.render('index', {
       layout:'main',
-      articles, categories
+      articles, categories, categorie,       
+      categs: true
     })
+    console.log(categorie)
   })
 } 

@@ -4,9 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog App</title>
-
-
+    {{#if article1}}
+        <title>{{article.title}}</title>
+    {{else}}
+        {{#if categs}}
+            <title>{{categorie.[0].name}}</title>
+        {{else}}
+            <title>Blog App</title>
+        {{/if}}
+    {{/if}}
     <!-- Tailwind -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <style>
@@ -99,7 +105,6 @@
             <div class="uppercase pb-6">&copy; myblog.com</div>
         </div>
     </footer>
-
 
 
 </body>
