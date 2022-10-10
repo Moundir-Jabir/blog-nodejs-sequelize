@@ -15,14 +15,18 @@ exports.adminCategorie = async (req, res) => {
   let categories = await Categories()
   res.render('./admin/categories', {
     categories,
-    layout: 'admin'
+    layout: 'admin',
+    page: 'Categories',
+    activeCategories: 'active'
   })
 }
 
 // rendre View Admin for add Categorie:
 exports.adminAddCategorie = (req, res) => {
   res.render('./admin/add-category', {
-    layout: 'admin'
+    layout: 'admin',
+    page: 'Create Category',
+    activeCategories: 'active'
   })
 }
 
@@ -37,9 +41,9 @@ exports.adminUpdateCategorie = async (req, res) => {
   let i = cat.name
   res.render('./admin/update-category', {
     i, id,
-    layout: 'admin'
+    layout: 'admin',
+    page: 'Update Category'
   })
-  console.log(i)
 }
 // Create a categorie
 exports.create = (req, res) => {

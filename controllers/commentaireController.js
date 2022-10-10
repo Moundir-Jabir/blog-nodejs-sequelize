@@ -35,7 +35,9 @@ exports.adminGetCommentById = async (req,res) => {
     })
     res.render('./admin/update-comment' ,{
         layout: 'admin',
-        comment
+        comment,
+        page: 'Update Comment',
+        activePosts: 'active'
     })
 }
 
