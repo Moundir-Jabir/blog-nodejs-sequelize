@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog App</title>
     <style>
         .hov:hover{
             background-color: #256D85;
@@ -12,6 +11,7 @@
         }
     </style>
 
+    <title id="title">{{page}}</title>
     <!-- Tailwind -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <style>
@@ -39,6 +39,13 @@
                 <h1 class="text-xl text-white">Moukdir Weblog</h1>
             </div>
            
+            <nav>
+                <ul class="flex items-center justify-between font-bold text-sm text-white uppercase no-underline">
+                    {{#each categories}}
+                        <li></li><a class="hover:text-gray-200 hover:underline px-4" href="/article/getPostsByCategorie/{{id}}">{{name}}</a></li>
+                    {{/each}}
+                </ul>
+            </nav>
 
             <div class="flex items-center text-lg no-underline text-white pr-6">
                 <a class="" href="#">
@@ -61,7 +68,7 @@
     <!-- Text Header -->
     <header class="w-full  mx-auto">
         <div class="flex flex-col items-center py-12" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZGV2ZWxvcHBtZW50JTIwaW5mb3JtYXRpcXVlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=400&q=60') !important;background-repeat:no-repeat; background-size:cover;background-repeat:no-repeat">
-            <a class="font-bold text-white uppercase  text-5xl" href="#">
+            <a class="font-bold text-white uppercase  text-5xl" href="/">
                 Moukdir
             </a>
             <p class="text-lg text-white">
@@ -94,7 +101,7 @@
             <div
                 class="w-full  mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
                 {{#each categories}}
-                <a href="#" class="hov rounded py-2 px-4 mx-2">{{name}}</a>
+                    <a href="/article/getPostsByCategorie/{{id}}" id="cat-name" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">{{name}}</a>
                 {{/each}}
             </div>
         </div>
@@ -113,8 +120,16 @@
         </div>
     </footer>
 
-
-
+    <script>
+        const title = document.querySelector('#title')
+        const catName = document.querySelectorAll('#cat-name')
+        catName.forEach(cat => {
+            if(cat.textContent == title.textContent) {
+                cat.classList.add('bg-gray-400', 'rounded')
+                cat.classList.remove('hover:bg-gray-400')
+            }
+        })
+    </script>
 </body>
 
 </html>

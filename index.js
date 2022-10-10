@@ -4,7 +4,7 @@ const app = express()
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const { engine } = require('express-handlebars')
-const { getarticles, getArticlebyid } = require('./controllers/articleController')
+const { getarticles, getArticlebyid, getPostsByCategorie } = require('./controllers/articleController')
 const { getCategorie } = require('./controllers/categorieController')
 const path = require('path')
 
@@ -36,9 +36,12 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.get('/', async (req, res) => {
     let categories = await getCategorie()
     let articles = await getarticles()
+    // let postsByCate = await getPostsByCategorie(req.params.id)
     res.render('index', {
-        articles, categories
+        articles, categories,
+        page: 'Blog App'
     })
+    // console.log(data);
 })
 app.get('/:id', async (req, res) => {
     let categories = await getCategorie()
@@ -46,7 +49,8 @@ app.get('/:id', async (req, res) => {
     let comments = await getCommentsByPost(req.params.id)
     let avis = await getAvisByPost(req.params.id)
     res.render('article', {
-        article, categories, comments, avis
+        article, categories, comments, avis,
+        page: article.title
     })
 })
 

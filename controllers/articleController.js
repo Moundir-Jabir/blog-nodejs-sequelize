@@ -3,6 +3,7 @@ const { Avis } = require('../models/Avis')
 const { Categorie } = require('../models/Categorie')
 const { Commentaire } = require('../models/Commentaire')
 const sequelize = require('sequelize')
+const e = require('express')
 
 exports.getArticlebyid = (id) => {
   return Articles.findByPk(id,
@@ -23,10 +24,16 @@ const getarticles = exports.getarticles = () => {
 }
 
 exports.adminPosts = async (req, res) => {
+
   let posts = await getarticles()
   res.render('./admin/posts', {
-    posts,
-    layout: 'admin'
+    posts, 
+    layout: 'admin',
+    page: 'Posts',
+    isAdd: true,
+    btn: 'posts/add',
+    btnContent: 'Create New Post',
+    activePosts: 'active'
   })
 }
 
@@ -39,36 +46,11 @@ exports.adminCreatePosts = async (req, res) => {
 
   res.render('./admin/add-post', {
     Category,
-    layout: 'admin'
+    layout: 'admin',
+    page: 'Create Post'
   })
 
 }
-
-// exports.adminGetPostById = async (req, res) => {
-//   const id = req.params.id;
-//   const comments = await Commentaire.findAll({
-//     where: { articleId: id },
-//     raw: true,
-//     nest: true,
-//   })
-
-//   const avis = await Avis.findAll({
-//     where: { articleId: id },
-//     raw: true,
-//     nest: true,
-//   })
-
-//   const article = await Articles.findByPk(id,
-//     {
-//       raw: true,
-//       nest: true,
-//     })
-
-//   res.render('./admin/post-detail', {
-//     article, comments, avis,
-//     layout: 'admin'
-//   })
-// }
 
 exports.adminDeletePost = (req, res) => {
   const id = req.params.id;
@@ -108,7 +90,8 @@ exports.adminUpdatePost = async (req, res) => {
   res.render('./admin/update-post', {
     Category,
     article,
-    layout: 'admin'
+    layout: 'admin',
+    page: 'Update Post'
   })
 
 }
@@ -165,7 +148,7 @@ exports.update = (req, res) => {
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating post with id=" + id
+        message: "Error updating post with id=" + id +' '+ err
       });
     });
 };
@@ -193,7 +176,33 @@ exports.adminGetPostById = async (req, res) => {
 
   res.render('./admin/post-detail', {
     article, comments, avis,
-    layout: 'admin'
+    layout: 'admin',
+    page: article.title,
+    activePosts: 'active'
   })
-  console.log(avis)
+  // console.log(avis)
 }
+
+exports.getPostsByCategorie = async (req, res) => {
+  const id = req.params.idCategorie
+  const categories = await Categorie.findAll({
+    raw: true,
+    nest: true,
+  })
+  const categorie = await Categorie.findAll({
+    where: {id: id},
+    raw: true,
+    nest: true,
+  })
+  Articles.findAll({
+    where:{categorieId: id},
+    raw: true,
+    nest: true,
+  }) .then(articles => {
+    res.render('index', {
+      layout:'main',
+      articles, categories, categorie,       
+      page: categorie[0].name
+    })
+  })
+} 
