@@ -3,7 +3,7 @@ const { Avis } = require('../models/Avis')
 const { Categorie } = require('../models/Categorie')
 const { Commentaire } = require('../models/Commentaire')
 const sequelize = require('sequelize')
-const e = require('express')
+const Op = sequelize.Op
 
 exports.getArticlebyid = (id) => {
   return Articles.findByPk(id,
@@ -206,3 +206,24 @@ exports.getPostsByCategorie = async (req, res) => {
     })
   })
 } 
+
+// search function 
+
+exports.searchPosts = async (req, res) => {
+  let keyword = req.body.searchkeyword
+  keyword = keyword.toLowerCase()
+  let categories = await Categorie.findAll({
+    raw: true,
+    nest: true
+  })
+  await Articles.findAll({
+    where : { title : { [Op.like]: `%${keyword}%` }},
+    raw: true,
+    nest: true
+  }).then(articles => {
+    res.render('index', {
+      articles, categories, layout: 'main',
+      page: `Results for ${keyword}`
+    })
+  }).catch(err => res.send(err))
+}
