@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>it depends</title>
+    <title>{{page}}</title>
 
     <!-- vendor css -->
     <link href="/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -38,21 +38,21 @@
 
       <label class="sidebar-label">Navigation</label>
       <div class="sl-sideleft-menu">
-        <a href="/admin/index" class="sl-menu-link">
+        <a href="/admin/index" class="sl-menu-link {{activeDashboard}}">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
             <span class="menu-item-label">Dashboard</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
 
-        <a href="/admin/posts" class="sl-menu-link">
+        <a href="/admin/posts" class="sl-menu-link {{activePosts}}">
             <div class="sl-menu-item">
               <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
               <span class="menu-item-label">Posts</span>
             </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
 
-        <a href="/admin/categories" class="sl-menu-link">
+        <a href="/admin/categories" class="sl-menu-link {{activeCategories}}">
             <div class="sl-menu-item">
               <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
               <span class="menu-item-label">Categories</span>
@@ -90,7 +90,10 @@
     <div class="sl-mainpanel">
 
         <nav class="breadcrumb sl-breadcrumb d-flex justify-content-between w-100">
-            <span class="breadcrumb-item active w-100"></span>
+            <span class="breadcrumb-item active w-100">{{page}}</span>
+            {{#if isAdd}}
+              <a href="{{btn}}" class="btn btn-primary rounded add">{{btnContent}}</a>
+            {{/if}}
           </nav>
 
           {{{body}}}

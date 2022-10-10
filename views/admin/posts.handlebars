@@ -1,6 +1,5 @@
 <div class="sl-pagebody">
 
-  <a href="posts/add" class="btn btn-primary rounded add">Add new Post</a>
 
   <div class="row">
     {{#each posts}}
@@ -9,14 +8,7 @@
       <div class="card" style="width: 18rem;">
         <img src="/img/img11.jpg" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title text-center"> {{title}}</h5>
-          <div class="text-center">
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
-          </div>
+          <h5 class="card-title text-center my-1"> {{title}}</h5>
           <p class="card-text"><span class="text-dark">Created by :</span> Admin</p>
           <p class="card-text"><span class="text-dark">Created at :</span> {{createdAt}}</p>
           <p class="card-text"><span class="text-dark">Category :</span> {{categorie.name}}</p>

@@ -30,6 +30,8 @@ exports.adminDashboard = async (req,res) => {
         posts,
         comments,
         avis,
-        categories
+        categories,
+        page: 'Dashboard',
+        activeDashboard: 'active'
     })
 }

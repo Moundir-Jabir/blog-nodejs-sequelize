@@ -25,7 +25,9 @@ exports.adminAvisByPost = (req, res) => {
         .then(data => {
             res.render('./admin/avis', {
                 layout: 'admin',
-                data
+                data,
+                page: 'Avis',
+                activePosts: 'active'
             })
             // console.log(data)
         })
@@ -64,7 +66,9 @@ exports.adminGetRateById = async (req,res) => {
 
     res.render('./admin/update-rate' ,{
         layout: 'admin',
-        avis
+        avis,
+        page: 'Update Avis',
+        activePosts: 'active'
     })
     // console.log(avis)
 }

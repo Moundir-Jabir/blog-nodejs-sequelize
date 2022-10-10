@@ -38,7 +38,8 @@ app.get('/', async (req, res) => {
     let articles = await getarticles()
     // let postsByCate = await getPostsByCategorie(req.params.id)
     res.render('index', {
-        articles, categories
+        articles, categories,
+        page: 'Blog App'
     })
     // console.log(data);
 })
@@ -48,7 +49,8 @@ app.get('/:id', async (req, res) => {
     let comments = await getCommentsByPost(req.params.id)
     let avis = await getAvisByPost(req.params.id)
     res.render('article', {
-        article, categories, comments, avis
+        article, categories, comments, avis,
+        page: article.title
     })
 })
 
