@@ -1,6 +1,4 @@
 const { Categorie } = require('../models/Categorie')
-const { log } = require('handlebars')
-const { where } = require('sequelize')
 
 const Categories = exports.getCategorie = (req, res) => {
   return Categorie.findAll(
@@ -66,7 +64,7 @@ exports.create = (req, res) => {
 };
 
 
-
+// updates Categorie : 
 exports.update = (req, res) => {
   const id = req.params.id;
 
@@ -89,7 +87,7 @@ exports.update = (req, res) => {
     });
 };
 
-// delete a categorie : 
+// delete a categorie with ID  : 
 exports.Admindelete = (req, res) => {
   const id = req.params.id;
 

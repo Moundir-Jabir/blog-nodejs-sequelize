@@ -1,4 +1,3 @@
-const { application } = require('express')
 const express = require('express')
 const router = express.Router()
 const { getCategorie , create , update  } = require('../controllers/categorieController')
